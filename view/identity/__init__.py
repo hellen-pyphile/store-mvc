@@ -1,0 +1,1 @@
+from view.identity.customer_view import CustomerView

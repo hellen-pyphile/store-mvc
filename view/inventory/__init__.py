@@ -1,0 +1,1 @@
+from view.inventory.inventory_view import InventoryView

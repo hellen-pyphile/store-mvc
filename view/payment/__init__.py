@@ -1,0 +1,1 @@
+from view.payment.payment_view import PaymentView
