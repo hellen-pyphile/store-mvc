@@ -1,4 +1,4 @@
-from model.product import Product
+from model.product.product import Product
 
 class StockItem:
     def __init__(self, product: Product, quantity: int, min_stock: int = 3):
@@ -15,12 +15,14 @@ class StockItem:
         return self._quantity
 
     def add(self, n: int) -> None:
-        self._quantity = n + 1
+        if n <= 0:
+            raise ValueError("A quantidade deve ser maior que zero")
+        self._quantity += n
 
     def remove(self, n: int) -> None:
-        if not self._quantity:
-            raise ValueError(f"Insufficient stock for {self._product.sku}")
-        self._quantity = n - 1
+        if not n <= 0:
+            raise ValueError(f"Estoque indisponivel para {self._product.sku}")
+        self._quantity -= n
 
     def low_stock(self) -> bool:
         return self._quantity < self._min_stock
