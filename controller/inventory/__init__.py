@@ -1,0 +1,1 @@
+from controller.inventory.inventory_controller import InventoryController
