@@ -1,19 +1,22 @@
 from dataclasses import dataclass
-from .product_category import ProductType
-from .pricing import *
+from model.product.product_category import ProductType
+from model.product.pricing import *
 
-# Objetos de Valor
-@dataclass()
+#https://docs.python.org/3/library/dataclasses.html
+
 class SKU:
-    code: str
-    
+    def __init__(self, code):
+        if not code.strip():
+            raise ValueError("Nao pode estar vazio")
+        self.code = code
     def __str__(self):
         return self.code
 
-@dataclass()
 class Price:
-    amount: float
-    
+    def __init__(self, amount : float):
+        if amount < 0:
+            raise Val[("O preco nao pode ser menor que zero")]
+        self.amount = amount
     def __str__(self):
         return f"R$ {self.amount:.2f}"
     
@@ -54,7 +57,7 @@ class Product:
 
     # Métodos
     def final_price(self) -> float:
-        return self._price.amount + self._policy.factor()
+        return self._price.amount * self._policy.factor()
 
     def __repr__(self):
         return (f"Product(sku={self._sku!r}, name={self._name!r}, "

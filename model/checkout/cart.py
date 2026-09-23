@@ -1,5 +1,5 @@
-from model.product import Product
-from model.identity import Customer
+from model.product.product import Product
+from model.identity.customer import Customer
 
 class LineItem:
     def __init__(self, product: Product, quantity: int):

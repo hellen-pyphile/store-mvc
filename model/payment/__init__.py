@@ -1,2 +1,2 @@
-from .payment import *
-from .receipt import Receipt
+from model.payment.payment import *
+from model.payment.receipt import Receipt

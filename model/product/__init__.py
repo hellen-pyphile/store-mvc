@@ -1,3 +1,3 @@
-from .pricing import *
-from .product import Product, Price, SKU
-from .product_category import ProductType
+from model.product.pricing import *
+from model.product.product import Product, Price, SKU
+from model.product.product_category import ProductType
