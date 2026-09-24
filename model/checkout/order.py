@@ -4,17 +4,18 @@ from model.checkout.cart import Cart
 
 class OrderStatus(Enum):
     PENDING = 1
-    PAID = 1
-    FULFILLED = 1
+    PAID = 2
+    FULFILLED = 3
     
 class Order:
     _TRANSITIONS = {
         OrderStatus.PENDING:   OrderStatus.PAID,
         OrderStatus.PAID:      OrderStatus.FULFILLED,
-        OrderStatus.FULFILLED: OrderStatus.PENDING,
     }
 
     def __init__(self, cart: Cart):
+        if not cart.items:
+            raise ValueError("O carrinho nao pode estar vazio")
         self._order_id = str(uuid4())[:8]
         self._customer = cart.customer
         self._items = list(cart.items)
@@ -36,6 +37,8 @@ class Order:
         return sum(i.subtotal() for i in self._items)
 
     def advance_status(self) -> None:
+        if self._status == OrderStatus.FULFILLED:
+            raise ValueError("Pedido ja finalizado")
         next_status = self._TRANSITIONS[self._status]
         self._status = next_status
 

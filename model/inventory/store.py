@@ -2,6 +2,8 @@ from model.inventory.stock import StockItem
 
 class Shelf:
     def __init__(self, code: str):
+        if not code.strip():
+            raise ValueError("Preencha um valor valido")
         self._code = code
         self._items: list[StockItem] = []
 
@@ -31,6 +33,8 @@ class Shelf:
 
 class Aisle:
     def __init__(self, number: int):
+        if number <= 0:
+            raise ValueError("Preencha com um numero maior que 0")
         self._number  = number
         self._shelves: list[Shelf] = []
 
